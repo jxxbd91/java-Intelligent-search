@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DBUtils {
-    private static String url = "jdbc:mysql://localhost:3306/search";
+    private static String url = "jdbc:mysql://localhost:3306/search?useUnicode=true&characterEncoding=UTF-8";
     private static String username = "root";
     private static String password = "123456";
     private static Connection conn;

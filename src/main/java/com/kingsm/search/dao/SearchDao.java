@@ -20,24 +20,51 @@ public class SearchDao {
     public boolean insert(Keyword kw) throws SQLException {
         String value = kw.getKw();
 
-        String sql = "INSERT INTO usr(`keywords`) VALUES '" + value + "''";
+        String sql = "INSERT INTO usr(`keywords`) VALUES ('" + value + "')";
 
-        boolean flag = st.execute(sql);
+        boolean flag = st.executeUpdate(sql) == 1;
+
+//        st.close();
+
+//        conn.close();
 
         return flag;
     }
 
     /**
-     * 查询数据
+     * 模糊查询数据
      */
     public ResultSet query(Keyword kw) throws SQLException {
         String value = kw.getKw();
 
         ResultSet rs = null;
 
-        String sql = "SELECT * FROM usr WHERE keywords LIKE '%" + value + "'%";
+        String sql = "SELECT * FROM usr WHERE keywords LIKE '%" + value + "%'";
 
         rs = st.executeQuery(sql);
+
+//        st.close();
+
+//        conn.close();
+
+        return rs;
+    }
+
+    /**
+     * 精确匹配数据
+     */
+    public ResultSet exactMatch (Keyword kw) throws SQLException {
+        ResultSet rs = null;
+
+        String value = kw.getKw();
+
+        String sql = "SELECT * FROM usr WHERE `keywords` = '" + value +"'";
+
+        rs = st.executeQuery(sql);
+
+//        st.close();
+
+//        conn.close();
 
         return rs;
     }
